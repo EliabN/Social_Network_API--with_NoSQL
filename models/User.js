@@ -30,12 +30,16 @@ const userSchema = new Schema(
                 message: props => `${props.value} is not a valid email.`
             }
         },
-        thoughts: [thoughtSchema],
-        friends: [userSchema]
+        thoughts: [],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'user',
+            },
+        ],
     },
     {
         toJSON: {
-            getters: true,
             virtuals: true,
         },
         id: false,
@@ -43,7 +47,7 @@ const userSchema = new Schema(
 );
 
 // Virtual property `friendCount` that gets the amount of friend of the user
-friendCount.virtual('friendCount').get(function () {
+userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
