@@ -1,5 +1,5 @@
 // User Controller
-// Define User model from users
+// Import and Define User mode
 const User = require('../models/User');
 
 // Module to be exported with CRUD functions for users
