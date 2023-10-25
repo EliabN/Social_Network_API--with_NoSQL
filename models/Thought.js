@@ -1,5 +1,5 @@
-//Thought model
-const { Schema, model } = require('mongoose');
+// Import the 'Types' object from mongoose
+const { Schema, model, Types } = require('mongoose');
 
 // The reactionSchema defines the schema of the sub-document
 const reactionSchema = new Schema({

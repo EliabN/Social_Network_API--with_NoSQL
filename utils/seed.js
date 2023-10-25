@@ -36,22 +36,23 @@ connection.once('open', async () => {
             userName: name,
             reactions: [
                 {
-                    reactionBody: 'Great thought!',
+                    reactionBody: newThoughtText + name,
                     userName: 'Reaction User 1',
                 },
                 {
-                    reactionBody: 'I agree!',
+                    reactionBody: name + newThoughtText,
                     userName: 'Reaction User 2',
                 },
             ],
         };
+        thoughts.push(thoughtObject)
 
         await Thought.collection.insertOne(thoughtObject);
 
 
         const newUser = {
-            userName: name.toString(),
-            email: email.toString(),
+            userName: name,
+            email: email,
             thoughts: [thoughtObject],
         };
         users.push(newUser);
@@ -61,6 +62,7 @@ connection.once('open', async () => {
     await User.collection.insertMany(users);
 
     console.table(users);
-    console.timeEnd('Seeding complete 🌱');
+    console.table(thoughts);
+    console.info('Seeding complete 🌱');
     process.exit(0);
 });
