@@ -1,6 +1,6 @@
 // User Model
 const { Schema, model } = require('mongoose');
-const thoughtSchema = require('./Thought');
+const Thought = require('./Thought');
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -15,7 +15,9 @@ const userSchema = new Schema(
             type: String,
             required: true,
             trimmed: true,
-            trim: true, // Trim any leading or trailing whitespace from the email
+            // Trim any leading or trailing whitespace from the email
+            trim: true,
+            lowercase: true,
 
             // Custom validation using a regular expression
             validate: {

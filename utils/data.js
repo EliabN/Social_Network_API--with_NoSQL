@@ -1,38 +1,14 @@
 // Add seed Data in here
-const names = [
-    'Aaran',
-    'Aaren',
-    'Aarez',
-    'Aarman',
-    'Aaron',
-    'Aaron-James',
-    'Aarron',
-    'Aaryan',
-    'Aaryn',
-    'Aayan',
-    'Aazaan',
-    'Abaan',
-    'Abbas',
-    'Abdallah',
-    'Abdalroof',
-    'Abdihakim',
-    'Abdirahman',
-    'Abdisalam',
-    'Abdul',
-    'Abdul-Aziz',
-    'Abdulbasir',
-    'Zijie',
-    'Zinedine',
-    'Zion',
-    'Zishan',
-    'Ziya',
-    'Ziyaan',
-    'Zohaib',
-    'Zohair',
-    'Zoubaeir',
-    'Zubair',
-    'Zubayr',
-    'Zuriel',
+const thoughts = [
+    {
+        reactionBody: 'Decision Trackers is awesome',
+        userName: 'Sean'
+    },
+    {
+        reactionBody: 'Awesome app!',
+        userName: 'Jamie Doe'
+    },
+    
 ];
 
 const thought = [

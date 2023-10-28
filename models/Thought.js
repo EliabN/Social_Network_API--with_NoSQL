@@ -2,26 +2,34 @@
 const { Schema, model, Types } = require('mongoose');
 
 // The reactionSchema defines the schema of the sub-document
-const reactionSchema = new Schema({
-    reactionId: {
-        type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId(),
+const reactionSchema = new Schema(
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            maxlength: 280
+        },
+        createdAt: {
+            // Date created
+            type: Date,
+            default: Date.now,
+        },
+        userName: {
+            type: String,
+            required: true,
+        }
     },
-    reactionBody: {
-        type: String,
-        required: true,
-        maxlength: 280
-    },
-    createdAt: {
-        // Date created
-        type: Date,
-        default: Date.now,
-    },
-    userName: {
-        type: String,
-        required: true,
+    {
+        toJSON: {
+            getters: true,
+        },
+        id: false,
     }
-});
+);
 
 // The thoughtSchema defines the schema of the parent document
 const thoughtSchema = new Schema({
