@@ -15,6 +15,11 @@ AS A social media startup
 I WANT an API for my social network that uses a NoSQL database
 SO THAT my website can handle large amounts of unstructured data
 ```
+## Walkthrough demo
+
+[![A video thumbnail shows the command-line social network web application with a play button overlaying the view.](./Assets/nosql-walkthrough-vid.png)](https://watch.screencastify.com/v/a3tRhve3rsfV1tqJXycx)
+
+[Click here to watch](https://watch.screencastify.com/v/a3tRhve3rsfV1tqJXycx)
 
 ## Preview
 
@@ -181,6 +186,13 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 * `POST` to create a reaction stored in a single thought's `reactions` array field
 
 * `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
+## License
+
+This project license is under the [MIT](https://opensource.org/licenses/MIT)
+
+## Contribute
+
+Git fork. Pull request
 
 ## Resources
 
