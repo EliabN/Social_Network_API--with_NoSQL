@@ -76,12 +76,12 @@ module.exports = {
     }
   },
 
-  // Add a user thought
-  async addUserThought(req, res) {
+  // Add a user friend
+  async addUserFriend(req, res) {
     try {
       const user = await user.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { thoughts: req.body } },
+        { $addToSet: { friends: req.body } },
         { runValidators: true, new: true }
       );
 
@@ -95,12 +95,12 @@ module.exports = {
     }
   },
 
-  // Remove user thought
-  async removeUserThought(req, res) {
+  // Remove user friend
+  async removeUserFriend(req, res) {
     try {
       const user = await user.findOneAndUpdate(
         { _id: req.params.userId },
-        { $pull: { thoughts: { thoughtId: req.params.thoughtId } } },
+        { $pull: { friends: { friendId: req.params.friendId } } },
         { runValidators: true, new: true }
       )
 
@@ -108,7 +108,7 @@ module.exports = {
         return res.status(404).json({ message: 'No user with this id!' });
       }
 
-      res.json({ user, message: 'Thought deleted' });
+      res.json({ user, message: 'Friend deleted' });
     } catch (err) {
       res.status(500).json(err);
     }

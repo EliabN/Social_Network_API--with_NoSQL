@@ -33,26 +33,32 @@ connection.once('open', async () => {
         for (i = 0; i < thoughtText.length; i++) {
             const name = names[i];
             const email = `${name}@testmail.com`;
-            // // Create thoughts
-            // const createThought = {
-            //     thoughtText: thoughtText[i],
-            //     userName: name,
-            //     reactions: reactions[i]
-            // }
+
             const newThought = await Thought.create({
                 thoughtText: thoughtText[i],
                 userName: name,
                 reactions: reactions[i]
             });
 
-            const newUser = await User.create({
-                userName: name,
-                email: email,
-                thoughts: [newThought],
-            });
-            allUsers.push(newUser)
-            console.log(newUser)
+            let newUser;
 
+            if (i < 2) {
+                newUser = await User.create({
+                    userName: name,
+                    email: email,
+                    thoughts: [newThought],
+                });
+            } else {
+                newUser = await User.create({
+                    userName: name,
+                    email: email,
+                    thoughts: [newThought],
+                    friends: [allUsers[1]]
+                });
+            }
+
+            allUsers.push(newUser);
+            console.log(newUser);
         }
 
         console.table(allUsers);
