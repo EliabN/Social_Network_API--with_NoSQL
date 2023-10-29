@@ -21,6 +21,7 @@ module.exports = {
       const user = await User.findOne({ _id: req.params.userId })
         .select('-__v');
 
+      // If User exists
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
       }
@@ -50,6 +51,7 @@ module.exports = {
         { runValidators: true, new: true }
       );
 
+      // If User exists
       if (!user) {
         res.status(404).json({ message: 'No user with this id!' });
       }
@@ -65,6 +67,7 @@ module.exports = {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId });
 
+      // If User exists
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
       }
@@ -85,6 +88,7 @@ module.exports = {
         { runValidators: true, new: true }
       );
 
+      // If User exists
       if (!user) {
         return res.status(404).json({ message: 'No user with this id!' });
       }
@@ -104,6 +108,7 @@ module.exports = {
         { runValidators: true, new: true }
       )
 
+      // If User exists
       if (!user) {
         return res.status(404).json({ message: 'No user with this id!' });
       }
