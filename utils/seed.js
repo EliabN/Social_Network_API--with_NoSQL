@@ -5,7 +5,7 @@ const User = require('../models/User');
 // Import User model
 const Thought = require('../models/Thought');
 // Import data functions for seeding
-const { getRandomUserName, thought } = require('./data');
+const { names, thoughtText, reactions } = require('./data');
 
 // Start the seeding runtime timer
 connection.on('error', (err) => err);
@@ -23,125 +23,43 @@ connection.once('open', async () => {
         await connection.dropCollection('users');
     }
 
+    console.log(thoughtText)
+    const allThoughts = [];
+    const allUsers = [];
+
+
     try {
-        console.log('Connected');
+        // Create users with thoughts
+        for (i = 0; i < thoughtText.length; i++) {
+            const name = names[i];
+            const email = `${name}@testmail.com`;
+            // // Create thoughts
+            // const createThought = {
+            //     thoughtText: thoughtText[i],
+            //     userName: name,
+            //     reactions: reactions[i]
+            // }
+            const newThought = await Thought.create({
+                thoughtText: thoughtText[i],
+                userName: name,
+                reactions: reactions[i]
+            });
 
-        // Drop collections if they exist
-        await Promise.all([
-            connection.dropCollection('thoughts'),
-            connection.dropCollection('users')
-        ]);
+            const newUser = await User.create({
+                userName: name,
+                email: email,
+                thoughts: [newThought],
+            });
+            allUsers.push(newUser)
+            console.log(newUser)
 
-        // Create thoughts
-        const thought1 = await Thought.create({
-            thoughtText: 'I love the Decision Trackers app',
-            userName: 'Zijie',
-            reactions: [
-                {
-                    reactionBody: 'Decision Trackers is awesome',
-                    userName: 'Sean'
-                },
-                {
-                    reactionBody: 'Awesome app!',
-                    userName: 'Jamie Doe'
-                }
-            ]
-        });
+        }
 
-        const thought2 = await Thought.create({
-            thoughtText: 'Running can help to keep fit',
-            userName: 'John',
-            reactions: [
-                {
-                    reactionBody: 'Yess Agreed',
-                    userName: 'Ben J'
-                },
-                {
-                    reactionBody: 'Definitely a fact!',
-                    userName: 'Kobe Teh'
-                }
-            ]
-        });
-
-        // Create users and link thoughts to users
-        const user1 = await User.create({
-            friends: [],
-            userName: 'Zijie',
-            email: 'zijie@testmail.com',
-            thoughts: [thought1._id]
-        });
-
-        const user2 = await User.create({
-            friends: [],
-            userName: 'John',
-            email: 'john@testmail.com',
-            thoughts: [thought2._id]
-        });
-
+        console.table(allUsers);
         console.log('Seeding completed successfully');
     } catch (error) {
         console.error('Seeding failed:', error);
     } finally {
         process.exit(0);
     }
-
-    // // Empty arrays for randomly generated users
-    // const users = [];
-    // const thoughts = [];
-
-
-    // users.push({
-    //     friends: [],
-    //     _id: 1,
-    //     userName: 'Zijie',
-    //     email: 'Zijie@testmail.com',
-    //     thoughts: [
-    //         {
-    //             thoughtText: 'I the Decision Trackers app',
-    //             userName: 'Zijie',
-    //             reactions: [
-    //                 {
-    //                     reactionBody: 'Decision Trackers is awesome',
-    //                     userName: 'Sean'
-    //                 },
-    //                 {
-    //                     reactionBody: 'Awesome app!',
-    //                     userName: 'Jamie Doe'
-    //                 }
-    //             ],
-    //             _id: 101
-    //         }
-    //     ],
-    // },
-    //     {
-    //         friends: [],
-    //         _id: 2,
-    //         userName: 'John',
-    //         email: 'John@testmail.com',
-    //         thoughts: [
-    //             {
-    //                 thoughtText: 'Running can help to keep fit',
-    //                 userName: 'John',
-    //                 reactions: [
-    //                     {
-    //                         reactionBody: 'Yess Agreed',
-    //                         userName: 'Ben J'
-    //                     },
-    //                     {
-    //                         reactionBody: 'Definitely a fact!',
-    //                         userName: 'Kobe Teh'
-    //                     }
-    //                 ],
-    //                 _id: 102
-    //             }
-    //         ],
-    //     });
-
-    // // Wait for the users to be inserted into the database
-    // await User.collection.insertMany([users]);
-
-    // console.table(users);
-    // // console.table(thoughts);
-    // console.info('Seeding complete 🌱');
-    // process.exit(0);
 });

@@ -127,19 +127,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No thought with this id!' });
             }
 
-            // const removedReaction = thought.reactions.find(
-            //     (reaction) => reaction.reactionId.toString() === req.params.reactionId
-            // );
-
-            // if (!removedReaction) {
-            //     return res.status(404).json({ message: 'No reaction with this id!' });
-            // }
-
-            // res.json({ message: 'Reaction deleted', updatedThought: thought, removedReaction });
-
-
             res.json({ thought, message: 'Reaction deleted' });
-            //res.json();
         } catch (err) {
             res.status(500).json(err);
         }
