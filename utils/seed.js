@@ -23,8 +23,8 @@ connection.once('open', async () => {
         await connection.dropCollection('users');
     }
 
-    console.log(thoughtText)
-    const allThoughts = [];
+    //console.log(thoughtText)
+    //const allThoughts = [];
     const allUsers = [];
 
 
@@ -58,10 +58,10 @@ connection.once('open', async () => {
             }
 
             allUsers.push(newUser);
-            console.log(newUser);
+            //console.log(newUser);
         }
 
-        console.table(allUsers);
+        //console.table(allUsers);
         console.log('Seeding completed successfully');
     } catch (error) {
         console.error('Seeding failed:', error);

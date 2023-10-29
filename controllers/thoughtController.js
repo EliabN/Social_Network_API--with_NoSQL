@@ -94,7 +94,7 @@ module.exports = {
 
             if (!user) {
                 return res.status(404).json({
-                    message: 'Thought deleted, but no courses found',
+                    message: 'Thought deleted, but no users found',
                 });
             }
 
@@ -129,7 +129,7 @@ module.exports = {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
-                { $pull: { reactions: req.params.reactionId } },
+                { $pull: { reactions: { reactionId: req.params.reactionId } } },
                 { runValidators: true, new: true }
             )
 
